@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Mellcita</title>
+
+<style>
+
+@media (min-width:768px){
+body{
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+font-family:sans-serif;
+}
+body::before{
+content:"📱 Ábrelo desde tu celular";
+font-size:22px;
+}
+.app{display:none;}
+}
+
+body{
+margin:0;
+font-family:'Segoe UI',sans-serif;
+background:linear-gradient(135deg,#ff4fa3,#7a4dff);
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+overflow:hidden;
+}
+
+.app{
+width:100%;
+max-width:420px;
+padding:30px;
+text-align:center;
+}
+
+.card{
+background:white;
+color:#444;
+border-radius:20px;
+padding:25px;
+box-shadow:0 15px 40px rgba(0,0,0,0.25);
+animation:fade 0.6s;
+}
+
+h2{
+margin-top:0;
+}
+
+button{
+margin-top:20px;
+padding:14px 20px;
+border:none;
+border-radius:30px;
+background:#ff4fa3;
+color:white;
+font-size:16px;
+cursor:pointer;
+width:100%;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.05);
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+.option{
+background:#7a4dff;
+margin-top:10px;
+}
+
+.foto-container{
+position:relative;
+margin-top:20px;
+perspective:1000px;
+animation:fotoEntrada 1.2s ease;
+}
+
+/* FOTO */
+
+.foto{
+width:100%;
+border-radius:18px;
+box-shadow:
+0 20px 40px rgba(0,0,0,0.4),
+0 0 35px rgba(255,80,180,0.5);
+animation:zoomFoto 6s ease-in-out infinite;
+transition:transform 0.6s;
+}
+
+.foto-container:hover .foto{
+transform:rotateY(8deg) rotateX(6deg) scale(1.05);
+}
+
+/* BRILLO SOBRE FOTO */
+
+.foto-container::after{
+content:"";
+position:absolute;
+top:0;
+left:-120%;
+width:60%;
+height:100%;
+background:linear-gradient(
+120deg,
+transparent,
+rgba(255,255,255,0.9),
+transparent
+);
+animation:brillo 3.5s infinite;
+}
+
+/* RESPLANDOR */
+
+.foto-container::before{
+content:"";
+position:absolute;
+top:-15px;
+left:-15px;
+right:-15px;
+bottom:-15px;
+background:radial-gradient(circle, rgba(255,150,220,0.4), transparent);
+filter:blur(25px);
+z-index:-1;
+}
+
+/* ANIMACIONES */
+
+@keyframes zoomFoto{
+0%{transform:scale(1);}
+50%{transform:scale(1.05);}
+100%{transform:scale(1);}
+}
+
+@keyframes brillo{
+0%{left:-120%;}
+100%{left:150%;}
+}
+
+@keyframes fade{
+from{opacity:0;transform:translateY(20px);}
+to{opacity:1;}
+}
+
+@keyframes fotoEntrada{
+0%{opacity:0;transform:scale(0.7) translateY(40px);}
+100%{opacity:1;transform:scale(1);}
+}
+
+/* CORAZONES */
+
+.heart{
+position:absolute;
+animation:float 6s linear forwards;
+}
+
+@keyframes float{
+0%{
+transform:translateY(0) scale(0.5);
+opacity:1;
+}
+100%{
+transform:translateY(-100vh) scale(1.5);
+opacity:0;
+}
+}
+
+/* EXPLOSION */
+
+.explosion{
+position:absolute;
+animation:explode 1s ease-out forwards;
+}
+
+@keyframes explode{
+0%{
+transform:scale(0.5);
+opacity:1;
+}
+100%{
+transform:scale(2) translateY(-100px);
+opacity:0;
+}
+}
+
+/* ROSAS */
+
+.rose{
+position:absolute;
+animation:roseFall linear forwards;
+pointer-events:none;
+}
+
+@keyframes roseFall{
+0%{
+transform:translateY(-10vh) rotate(0deg);
+opacity:1;
+}
+100%{
+transform:translateY(110vh) rotate(360deg);
+opacity:0.9;
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<div class="card" id="pantalla">
+
+<h2>Hola 🙂</h2>
+
+<p>Quería preguntarte algo...</p>
+
+<button onclick="siguiente(1)">Continuar</button>
+
+</div>
+
+</div>
+
+<script>
+
+const pantalla=document.getElementById("pantalla")
+
+function siguiente(paso){
+
+if(paso===1){
+
+pantalla.innerHTML=`
+
+<h2>Hoy es un día especial 🌸</h2>
+
+<p>¿Sabes qué día es hoy?</p>
+
+<button class="option" onclick="siguiente(2)">Sí lo sé</button>
+<button class="option" onclick="siguiente(3)">No estoy segura</button>
+
+`
+
+}
+
+if(paso===2){
+
+pantalla.innerHTML=`
+
+<h2>Entonces lo sabes 💜</h2>
+
+<p>Hoy celebramos a todas las mujeres increíbles. Y no te quedas atrás, te quiero, FELIZ DÍA.</p>
+
+<button onclick="siguiente(4)">Continuar</button>
+
+`
+
+}
+
+if(paso===3){
+
+pantalla.innerHTML=`
+
+<h2>Hoy es 8 de marzo 🌸</h2>
+
+<p>El Día de la Mujer, en especial para ti mi duende favorito :3.</p>
+
+<button onclick="siguiente(4)">Continuar</button>
+
+`
+
+}
+
+if(paso===4){
+
+pantalla.innerHTML=`
+
+<h2>Y quería decirte algo...</h2>
+
+<p>Hay duendecillos que hacen el mundo más bonito.</p>
+
+<button onclick="siguiente(5)">Seguir</button>
+
+`
+
+}
+
+if(paso===5){
+
+pantalla.innerHTML=`
+
+<h2>✨ Tú eres una de ellas ✨</h2>
+
+<p>Eres fuerte, valiosa, carismática, loca, muy LOCA, hermosa y muy especial duendecillo.</p>
+
+<button onclick="siguiente(6)">Abrir carta 💌</button>
+
+`
+
+}
+
+if(paso===6){
+
+pantalla.innerHTML=`
+
+<h2>💌 Carta para ti</h2>
+
+<p>
+En este día quiero recordarte algo:
+que eres la mujer más hermosa y maravillosa que he conocido,
+gracias Mell Garcia, más conocida como la chata mata hormigas.
+</p>
+
+<div class="foto-container">
+<img src="foto.jpeg" class="foto">
+</div>
+
+<button onclick="celebrar()">Celebrar 🎉</button>
+
+`
+
+}
+
+}
+
+/* CELEBRAR */
+
+function celebrar(){
+
+for(let i=0;i<40;i++){
+
+const h=document.createElement("div")
+
+h.className="heart"
+h.innerHTML="💜"
+
+h.style.left=Math.random()*100+"vw"
+h.style.bottom="0px"
+h.style.fontSize=(20+Math.random()*30)+"px"
+
+document.body.appendChild(h)
+
+setTimeout(()=>h.remove(),6000)
+
+}
+
+for(let i=0;i<30;i++){
+
+const e=document.createElement("div")
+
+e.className="explosion"
+e.innerHTML="❤️"
+
+e.style.left=Math.random()*100+"vw"
+e.style.top=Math.random()*100+"vh"
+e.style.fontSize=(25+Math.random()*35)+"px"
+
+document.body.appendChild(e)
+
+setTimeout(()=>e.remove(),1200)
+
+}
+
+}
+
+/* ROSAS CAYENDO */
+
+function crearRosa(){
+
+const r=document.createElement("div")
+
+r.className="rose"
+r.innerHTML="🌹"
+
+r.style.left=Math.random()*100+"vw"
+r.style.fontSize=(20+Math.random()*30)+"px"
+r.style.animationDuration=(4+Math.random()*3)+"s"
+
+document.body.appendChild(r)
+
+setTimeout(()=>{r.remove()},7000)
+
+}
+
+setInterval(crearRosa,700)
+
+</script>
+
+</body>
+</html>
